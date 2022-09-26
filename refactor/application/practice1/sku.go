@@ -3,11 +3,23 @@ package practice1
 // 商品
 type Sku struct {
 	// id
-	Id int
+	id int
 	// 名称
-	Name string
+	name string
 	// 体积
-	Volume float32
+	volume float32
 	// 是否核心
-	IsCore bool
+	isCore bool
+}
+
+func (this *Sku) IsCore() bool {
+	return this.isCore
+}
+
+func (this *Sku) GetId() int {
+	return this.id
+}
+
+func (this *Sku) GetVolume() float32 {
+	return this.volume
 }
