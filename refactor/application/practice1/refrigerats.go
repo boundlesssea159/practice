@@ -64,13 +64,11 @@ func (this *Refrigerates) AddSku(sku SkuAmount) {
 
 // 商品熔断
 func (this *Refrigerates) SkuLimit() {
-	// 计算熔断系数
-	this.computeSkuRatio()
-	// 遍历商品进行熔断
-	this.reComputeSkuAmount()
+	this.computeSkuLimitRatio()
+	this.limit()
 }
 
-func (this *Refrigerates) computeSkuRatio() {
+func (this *Refrigerates) computeSkuLimitRatio() {
 	this.computeCoreSkuRatio()
 	this.computeNonCoreSkuRatio()
 }
@@ -114,7 +112,7 @@ func (this *Refrigerates) GetSkuAmountById(id int) SkuAmount {
 	return SkuAmount{}
 }
 
-func (this *Refrigerates) reComputeSkuAmount() {
+func (this *Refrigerates) limit() {
 	for id, _ := range this.residualSkus {
 		sku, _ := this.residualSkus[id]
 		if sku.IsCore() {
